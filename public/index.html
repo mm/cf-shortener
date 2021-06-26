@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Shorten my URL</title>
+        <script src="https://unpkg.com/vue@next"></script>
+        <link rel="stylesheet" href="static/style.css" />
+    </head>
+    <body>
+        <div id="app">
+            <div class="container">
+                <h1>Shorten a URL</h1>
+                <p>Fill in the URL you want to shorten below.</p>
+    
+                <form @submit.prevent="handleUrlSubmit">
+                    <input 
+                        type="text"
+                        id="input-url"
+                        name="url"
+                        size="40"
+                        placeholder="https://google.com"
+                        required
+                        v-model="longUrl"
+                    />
+                    <input type="submit" id="input-submit" value="Shorten" />
+                </form>
+
+                <div class="shortened-url" v-if="shortUrl">
+                    <p>Your new shortened URL is:</p>
+                    <h2>{{ shortUrl }}</h2>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    longUrl: null,
+                    shortUrl: null,
+                }
+            },
+            methods: {
+                handleUrlSubmit() {
+                    console.log("URL submitted");
+                    fetch("/links", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            url: this.longUrl
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        this.shortUrl = 'https://redirect.mattcaroni.workers.dev/'+data.key;
+                    });
+                }
+            }
+        });
+        app.mount("#app");
+    </script>
+</html>
