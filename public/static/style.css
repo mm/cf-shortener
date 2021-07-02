@@ -55,7 +55,7 @@ input {
     margin-left: 0.2rem;
 }
 
-.shortened-url {
+.message {
     background: #C0E5C8;
     padding: 0.5rem;
     line-height: 1.5;
@@ -66,7 +66,12 @@ input {
     border-radius: 0.25rem;
 }
 
-.shortened-url h2 {
+.error {
+    background: #FEE9AE;
+    border-color: #FDD35D;
+}
+
+.message h2 {
     font-size: 1.4rem;
 }
 

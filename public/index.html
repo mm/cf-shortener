@@ -9,7 +9,7 @@
         <div id="app">
             <div class="container">
                 <h1>Shorten a URL</h1>
-                <p>Fill in the URL you want to shorten below.</p>
+                <p>Fill in the URL you want to shorten below. Links expire in 24 hours.</p>
     
                 <form @submit.prevent="handleUrlSubmit">
                     <input 
@@ -24,9 +24,13 @@
                     <input type="submit" id="input-submit" value="Shorten" />
                 </form>
 
-                <div class="shortened-url" v-if="shortUrl">
+                <div class="message" v-if="shortUrl">
                     <p>Your new shortened URL is:</p>
                     <h2>{{ shortUrl }}</h2>
+                </div>
+
+                <div class="message error" v-if="error">
+                    <p>Error shortening your link. Please ensure it's a valid URL and starts with http:// or https://</p>
                 </div>
             </div>
         </div>
@@ -37,11 +41,12 @@
                 return {
                     longUrl: null,
                     shortUrl: null,
+                    error: false,
+                    errorMessage: null
                 }
             },
             methods: {
                 handleUrlSubmit() {
-                    console.log("URL submitted");
                     fetch("/links", {
                         method: 'POST',
                         headers: {
@@ -51,10 +56,18 @@
                             url: this.longUrl
                         })
                     })
-                    .then(response => response.json())
+                    .then(response => {
+                        if (response.status == 200) {
+                            return response.json();
+                        } else {
+                            throw new Error("Issue saving URL");
+                        }
+                    })
                     .then(data => {
-                        console.log(data);
                         this.shortUrl = 'https://redirect.mattcaroni.workers.dev/'+data.key;
+                    })
+                    .catch((error) => {
+                        this.error = true;
                     });
                 }
             }
