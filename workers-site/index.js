@@ -3,7 +3,10 @@ import { customAlphabet } from 'nanoid'
 import { getAssetFromKV, mapRequestToAsset } from '@cloudflare/kv-asset-handler'
 
 const router = Router()
-const nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 6)
+const nanoid = customAlphabet(
+  '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
+  6,
+)
 
 router.get('/:key', async request => {
   let link = await SHORTEN.get(request.params.key)
@@ -22,7 +25,7 @@ router.get('/:key', async request => {
 })
 
 router.post('/links', async request => {
-  let key = nanoid();
+  let key = nanoid()
   let parsedBody = await request.json()
   if ('url' in parsedBody) {
     // Add key to our KV store so it can be retrieved later:
