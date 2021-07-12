@@ -1,7 +1,9 @@
 import { Router } from 'itty-router'
+import { customAlphabet } from 'nanoid'
 import { getAssetFromKV, mapRequestToAsset } from '@cloudflare/kv-asset-handler'
 
 const router = Router()
+const nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 6)
 
 router.get('/:key', async request => {
   let link = await SHORTEN.get(request.params.key)
@@ -20,17 +22,16 @@ router.get('/:key', async request => {
 })
 
 router.post('/links', async request => {
-  let array = new Uint32Array(1)
-  let randomValues = crypto.getRandomValues(array)
-  let unpadded = randomValues[0].toString(16)
-  let key = '00000000'.slice(unpadded.length) + unpadded
-
+  let key = nanoid();
   let parsedBody = await request.json()
   if ('url' in parsedBody) {
+    // Add key to our KV store so it can be retrieved later:
     await SHORTEN.put(key, parsedBody.url, { expirationTtl: 86400 })
+    let shortenedURL = `${new URL(request.url).origin}/${key}`
     let responseBody = {
       message: 'Link shortened successfully',
       key,
+      shortened: shortenedURL,
     }
     return new Response(JSON.stringify(responseBody), {
       headers: { 'content-type': 'application/json' },
