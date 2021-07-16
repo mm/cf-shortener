@@ -48,7 +48,7 @@
           shortUrl: null,
           error: false,
           errorMessage: null,
-        }
+        };
       },
       methods: {
         handleUrlSubmit() {
@@ -63,20 +63,20 @@
           })
             .then((response) => {
               if (response.status == 200) {
-                return response.json()
+                return response.json();
               } else {
-                throw new Error('Issue saving URL')
+                throw new Error('Issue saving URL');
               }
             })
             .then((data) => {
-              this.shortUrl = data.shortened
+              this.shortUrl = data.shortened;
             })
             .catch((error) => {
-              this.error = true
-            })
+              this.error = true;
+            });
         },
       },
-    })
-    app.mount('#app')
+    });
+    app.mount('#app');
   </script>
 </html>
