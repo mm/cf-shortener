@@ -11,8 +11,8 @@ const nanoid = customAlphabet(
   6,
 );
 
-router.get('/:key', async request => {
-  let link = await SHORTEN.get(request.params.key);
+router.get('/:slug', async request => {
+  let link = await SHORTEN.get(request.params.slug);
 
   if (link) {
     return new Response(null, {
@@ -27,21 +27,23 @@ router.get('/:key', async request => {
 });
 
 router.post('/links', async request => {
-  let key = nanoid();
-  let parsedBody = await request.json();
-  if ('url' in parsedBody) {
-    // Add key to our KV store so it can be retrieved later:
-    await SHORTEN.put(key, parsedBody.url, { expirationTtl: 86400 });
-    let shortenedURL = `${new URL(request.url).origin}/${key}`;
+  let slug = nanoid();
+  let requestBody = await request.json();
+  if ('url' in requestBody) {
+    // Add slug to our KV store so it can be retrieved later:
+    await SHORTEN.put(slug, requestBody.url, { expirationTtl: 86400 });
+    let shortenedURL = `${new URL(request.url).origin}/${slug}`;
     let responseBody = {
       message: 'Link shortened successfully',
-      key,
+      slug,
       shortened: shortenedURL,
     };
     return new Response(JSON.stringify(responseBody), {
       headers: { 'content-type': 'application/json' },
       status: 200,
     });
+  } else {
+    return new Response("Must provide a valid URL", { status: 400 });
   }
 });
 
