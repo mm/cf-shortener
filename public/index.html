@@ -63,6 +63,7 @@
           })
             .then((response) => {
               if (response.status == 200) {
+                this.error = false;
                 return response.json();
               } else {
                 throw new Error('Issue saving URL');

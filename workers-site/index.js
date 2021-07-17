@@ -1,9 +1,6 @@
 import { Router } from 'itty-router';
 import { customAlphabet } from 'nanoid';
-import {
-  getAssetFromKV,
-  mapRequestToAsset,
-} from '@cloudflare/kv-asset-handler';
+import { getAssetFromKV } from '@cloudflare/kv-asset-handler';
 
 const router = Router();
 const nanoid = customAlphabet(
