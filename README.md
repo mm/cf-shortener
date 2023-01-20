@@ -25,3 +25,12 @@ This is a link shortener that runs as a [Cloudflare Worker](https://workers.clou
     Copy the `id` you get in the terminal output to `wrangler.toml` in place of `ID_HERE`, and copy the `preview_id` you get in the terminal output in place of `PREVIEW_ID_HERE`.
 
 5. Deploy the Worker: `wrangler publish`
+
+## CHANGELOG
+
+### v1.0.1
+
+ + updated all dependencies
+ + + to `wrangler.toml` `compatibility_date = "2023-01-20"` (CloudFlare's new versioning tag
+ )
+ 
