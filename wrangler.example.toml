@@ -1,6 +1,7 @@
 name = "redirect"
 type = "webpack"
 compatibility_date = "2023-01-20"
+main = "workers-site/index.js"
 
 account_id = "ACCOUNT_ID_HERE"
 workers_dev = true
@@ -13,4 +14,3 @@ kv_namespaces = [
 
 [site]
 bucket = "./public"
-entry-point = "workers-site"
