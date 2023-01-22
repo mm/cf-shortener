@@ -22,5 +22,6 @@ pkg/
 wasm-pack.log
 worker/
 .cargo-ok
-wrangler.toml
 *.code-workspace
+# secrets
+wrangler.toml

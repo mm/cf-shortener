@@ -1,5 +1,4 @@
 name = "redirect"
-type = "webpack"
 compatibility_date = "2023-01-20"
 main = "workers-site/index.js"
 
