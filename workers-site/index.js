@@ -8,7 +8,7 @@ const nanoid = customAlphabet(
   6,
 );
 
-router.get('/:slug', async request => {
+router.get('/:slug', async (request) => {
   let link = await SHORTEN.get(request.params.slug);
 
   if (link) {
@@ -23,7 +23,7 @@ router.get('/:slug', async request => {
   }
 });
 
-router.post('/links', async request => {
+router.post('/links', async (request) => {
   let slug = nanoid();
   let requestBody = await request.json();
   if ('url' in requestBody) {
@@ -40,7 +40,7 @@ router.post('/links', async request => {
       status: 200,
     });
   } else {
-    return new Response("Must provide a valid URL", { status: 400 });
+    return new Response('Must provide a valid URL', { status: 400 });
   }
 });
 
@@ -53,6 +53,6 @@ async function handleEvent(event) {
   }
 }
 
-addEventListener('fetch', event => {
+addEventListener('fetch', (event) => {
   event.respondWith(handleEvent(event));
 });
