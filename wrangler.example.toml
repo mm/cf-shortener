@@ -4,8 +4,6 @@ main = "workers-site/index.js"
 
 account_id = "ACCOUNT_ID_HERE"
 workers_dev = true
-route = ""
-zone_id = ""
 
 kv_namespaces = [
     { binding = "SHORTEN", id = "ID_HERE", preview_id = "PREVIEW_ID_HERE" }
