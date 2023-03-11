@@ -44,8 +44,13 @@ This is a link shortener that runs as a [Cloudflare Worker](https://workers.clou
 
 ## Changelog
 
-### v1.0.1
+### v1.1.0
 
 - Updated all dependencies
 - Add to `wrangler.toml` `compatibility_date = "2023-01-20"` (CloudFlare's new versioning tag)
 - Switching from Wrangler V1 to Wrangler V2
+
+
+### v1.0.0
+
+- Initial version
