@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "redirect",
-  "version": "1.0.2",
+  "version": "1.0.1",
   "description": "A template for kick starting a Cloudflare Workers project",
   "main": "index.js",
   "type": "module",
@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write '**/*.{js,css,json,md}'"
   },
-  "author": "Matthew Mascioni <mascionim@gmail.com>",
+  "author": "Matthew Mascioni",
   "license": "MIT",
   "devDependencies": {
     "prettier": "^2.8.3"

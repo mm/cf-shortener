@@ -42,14 +42,10 @@ This is a link shortener that runs as a [Cloudflare Worker](https://workers.clou
 6. Deploy the Worker: `wrangler publish`
 
 
-## CHANGELOG
+## Changelog
 
 ### v1.0.1
 
- + updated all dependencies
- + add to `wrangler.toml` `compatibility_date = "2023-01-20"` (CloudFlare's new versioning tag)
-
-### v1.0.2
-
- + fix wrangler to v2+
- + updated instructions
+- Updated all dependencies
+- Add to `wrangler.toml` `compatibility_date = "2023-01-20"` (CloudFlare's new versioning tag)
+- Switching from Wrangler V1 to Wrangler V2
