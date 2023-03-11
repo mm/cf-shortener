@@ -6,16 +6,31 @@ This is a link shortener that runs as a [Cloudflare Worker](https://workers.clou
 
 1. Clone this repo: `git clone https://github.com/mm/cf-shortener.git`
 
-2. Ensure Wrangler is installed on your local machine and authenticate with Cloudflare:
-
+2. Ensure Wrangler ***v2***+ is installed on your local machine:
     ```shell
-    $ npm i @cloudflare/wrangler -g
+    $ wrangler version
+    ```
+
+    If you see `wrangler v1....`, then you need to remove the old version:
+    ```shell
+    $ npm uninstall -g @cloudflare/wrangler
+    ```
+
+    Now install if needed; note the missing "@cloudflare/":
+    ```shell
+    $ npm install -g wrangler
+    $ wrangler version
+    ⛅️ wrangler 2.*.* 
+    ```
+
+3. Authenticate with Cloudflare:
+    ```shell
     $ wrangler login
     ```
 
-3. In the project directory, copy the `wrangler.example.toml` file to `wrangler.toml`. Get your Cloudflare Account ID by running `wrangler whoami`. In `wrangler.toml`, replace `ACCOUNT_ID_HERE` with the account ID you get from Wrangler or the Workers dashboard.
+4. In the project directory, copy the `wrangler.example.toml` file to `wrangler.toml`. Get your Cloudflare Account ID by running `wrangler whoami`. In `wrangler.toml`, replace `ACCOUNT_ID_HERE` with the account ID you get from Wrangler or the Workers dashboard.
 
-4. Create the Workers KV namespace for the shortener:
+5. Create the Workers KV namespace for the shortener:
 
     ```shell
     $ wrangler kv:namespace create "SHORTEN"
@@ -24,4 +39,17 @@ This is a link shortener that runs as a [Cloudflare Worker](https://workers.clou
 
     Copy the `id` you get in the terminal output to `wrangler.toml` in place of `ID_HERE`, and copy the `preview_id` you get in the terminal output in place of `PREVIEW_ID_HERE`.
 
-5. Deploy the Worker: `wrangler publish`
+6. Deploy the Worker: `wrangler publish`
+
+
+## CHANGELOG
+
+### v1.0.1
+
+ + updated all dependencies
+ + add to `wrangler.toml` `compatibility_date = "2023-01-20"` (CloudFlare's new versioning tag)
+
+### v1.0.2
+
+ + fix wrangler to v2+
+ + updated instructions
